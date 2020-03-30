@@ -9,14 +9,15 @@ import './Blog.css';
 class Blog extends Component {
   state = { posts: [] };
 
-  componentDidMount() {
-    axios.get('http://jsonplaceholder.typicode.com/posts').then(response => {
-      const posts = response.data.slice(0, 4);
-      const updatedPosts = posts.map(post => {
-        return { ...post, author: 'Akki' };
-      });
-      this.setState({ posts: updatedPosts });
+  async componentDidMount() {
+    const response = await axios.get(
+      'http://jsonplaceholder.typicode.com/posts'
+    );
+    const posts = response.data.slice(0, 4);
+    const updatedPosts = posts.map(post => {
+      return { ...post, author: 'Akki' };
     });
+    this.setState({ posts: updatedPosts });
   }
 
   render() {
